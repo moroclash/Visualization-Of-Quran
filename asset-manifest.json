@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Visualization-Of-Quran/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/Visualization-Of-Quran/static/js/main.7c7d3ada.chunk.js",
+    "main.js.map": "/Visualization-Of-Quran/static/js/main.7c7d3ada.chunk.js.map",
+    "runtime-main.js": "/Visualization-Of-Quran/static/js/runtime-main.baa2874d.js",
+    "runtime-main.js.map": "/Visualization-Of-Quran/static/js/runtime-main.baa2874d.js.map",
+    "static/js/2.202084af.chunk.js": "/Visualization-Of-Quran/static/js/2.202084af.chunk.js",
+    "static/js/2.202084af.chunk.js.map": "/Visualization-Of-Quran/static/js/2.202084af.chunk.js.map",
+    "static/js/3.0cab8c16.chunk.js": "/Visualization-Of-Quran/static/js/3.0cab8c16.chunk.js",
+    "static/js/3.0cab8c16.chunk.js.map": "/Visualization-Of-Quran/static/js/3.0cab8c16.chunk.js.map",
+    "index.html": "/Visualization-Of-Quran/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/Visualization-Of-Quran/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.202084af.chunk.js.LICENSE.txt": "/Visualization-Of-Quran/static/js/2.202084af.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/Visualization-Of-Quran/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.baa2874d.js",
+    "static/js/2.202084af.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.7c7d3ada.chunk.js"
+  ]
+}
