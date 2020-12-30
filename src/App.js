@@ -1,10 +1,13 @@
-// import all_quran_info_source from './assets/Quran-content/all'
-import Navbar from './components/Navbar'
-import "bootstrap/dist/css/bootstrap.min.css"
+import Navbar from './components/Navbar';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { getAllQuranInfo, getSouraInfo } from './models/Prepare';
 
 function App() {
+  let Quran = getAllQuranInfo()
+  console.log(Quran)
+  getSouraInfo(112)
   return (
-      <Navbar />
+    <Navbar swar_names={Quran.swar_names} systems={Quran.systems_info} />
   );
 }
 
