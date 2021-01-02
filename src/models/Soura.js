@@ -11,7 +11,6 @@ export default function Soura(soura_name, soura_num, char_count_in_soura, ayat) 
   this.ayat = ayat || {};
 
   this.getAllInfoForChar = function (id, aya_id, system_id, system, char) {
-    console.log(this.ayat[aya_id])
     let AllCharInfo = this.ayat[aya_id].systems[system_id].groups[char]
     return CreateDataRow(id, this.soura_name, aya_id, system, char, AllCharInfo.count, AllCharInfo.tashkeel)
   }

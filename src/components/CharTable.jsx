@@ -7,6 +7,23 @@ import Paper from '@material-ui/core/Paper';
 import tashkeelVec from '../models/TashkeelVec';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
+import { Tooltip, OverlayTrigger, Button } from "react-bootstrap";
+// import Button from "./CustomButton";
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+
+const RemoveButton = ({deleteHandler, id}) => {
+    const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>
+    return (
+        <OverlayTrigger placement="top" overlay={remove}>
+            <Button size="sm" variant="danger" type="button" onClick={() => {deleteHandler(id)}}>
+                x
+            </Button>
+        </OverlayTrigger>
+    )
+}
+
+
 const styles = (theme) => ({
     flexContainer: {
         display: 'flex',
@@ -54,6 +71,7 @@ const HeadNames = [['ID', 0, 'id'],
 ["img:10", 0, "t10"],
 ["img:11", 0, "t11"],
 ["img:12", 0, "t12"],
+["", 0, "dbtn:"],
 ];
 
 
@@ -71,8 +89,11 @@ class MuiVirtualizedTable extends React.PureComponent {
             [classes.tableRowHover]: index !== -1 && onRowClick != null,
         });
     };
-    cellRenderer = ({ cellData, columnIndex }) => {
-        const { columns, classes, rowHeight, onRowClick } = this.props;
+    cellRenderer = ({ cellData, columnIndex, rowData, dataKey }) => {
+        // let { cellData, columnIndex, rowData, dataKey } = ll
+        // console.log(ll)
+        const { onDelet, classes, rowHeight, onRowClick } = this.props;
+        // rowData.id
         return (
             <TableCell
                 component="div"
@@ -80,30 +101,30 @@ class MuiVirtualizedTable extends React.PureComponent {
                     [classes.noClick]: onRowClick == null,
                 })}
                 variant="body"
-                style={{ height: rowHeight}}
+                style={{ height: rowHeight }}
                 align="center"//{(columnIndex != null && columns[columnIndex].numeric) || false ? 'center' : 'center'}
             >
-                {cellData}
+                {(dataKey.startsWith('dbtn:')) ? <RemoveButton id={rowData.id} deleteHandler={onDelet}/> : cellData}
             </TableCell>
         );
     };
 
     headerRenderer = ({ label, columnIndex }) => {
-        const { headerHeight, columns, classes } = this.props;
+        const { headerHeight, classes } = this.props;
         return (
             <TableCell
                 component="div"
                 className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
                 variant="head"
                 style={{ height: headerHeight, backgroundColor: "#343a40" }}
-                align= "center"//{columns[columnIndex].numeric || false ? 'center' : 'center'}
-            >{(label.startsWith('img:'))?
-                        <img className="taskeel-images"
-                             style={{width: "28px", height: "48px", backgroundColor: "#343a40"}}
-                             alt=""
-                             src={tashkeelVec[Number(label.split(":")[1])-1]} /> :
-                        <span style={{ color: "#fff"}}> {label}</span>
-              }            </TableCell>
+                align="center"//{columns[columnIndex].numeric || false ? 'center' : 'center'}
+            >{(label.startsWith('img:')) ?
+                <img className="taskeel-images"
+                    style={{ width: "28px", height: "48px", backgroundColor: "#343a40" }}
+                    alt=""
+                    src={tashkeelVec[Number(label.split(":")[1]) - 1]} /> :
+                <span style={{ color: "#fff" }}> {label}</span>
+                }            </TableCell>
         );
     };
 
@@ -172,6 +193,7 @@ export default function ReactVirtualizedTable(props) {
             <VirtualizedTable
                 rowCount={props.rows.length}
                 rowGetter={({ index }) => props.rows[index]}
+                onDelet={props.onDelete}
                 columns={HeadNames.map((cell) => {
                     return ({
                         width: 200,

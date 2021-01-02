@@ -8,7 +8,7 @@ import ReactVirtualizedTable from './components/CharTable';
 
 
 let Quran = getAllQuranInfo();
-console.log(Quran)
+// console.log(Quran)
 class App extends Component {
   constructor() {
     super()
@@ -19,7 +19,7 @@ class App extends Component {
 
   onAdd = (rowData) => {
     let newRows = this.state.rows
-    rowData.id = newRows.length+1
+    rowData.id = newRows.length === 0? 1 : newRows[newRows.length-1].id+1
     newRows.push(rowData)
     this.setState({ rows: newRows })
   }
@@ -34,7 +34,7 @@ class App extends Component {
       <React.Fragment>
         <Navbar />
         <AddCharBar Quran={Quran} onAdd={this.onAdd}/>
-        <ReactVirtualizedTable rows={this.state.rows} />
+        <ReactVirtualizedTable rows={this.state.rows} onDelete={this.onDelete} />
       </React.Fragment>
     );
   }
