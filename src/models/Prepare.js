@@ -147,7 +147,7 @@ export async function getSouraInfo(soura_num){
 
 
 export function getState(id, dataObj, soura_id, aya_num, system_id, system, char){
-    // console.log(id, dataObj, soura_id, aya_num, system_id, system, char)
+    console.log(id, dataObj, soura_id, aya_num, system_id, system, char)
     //check if All Quran
     if(soura_id === 0){
         return dataObj.getAllInfoForChar(id, system_id, char)

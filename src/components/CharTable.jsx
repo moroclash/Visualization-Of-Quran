@@ -120,7 +120,7 @@ class MuiVirtualizedTable extends React.PureComponent {
                 align="center"//{columns[columnIndex].numeric || false ? 'center' : 'center'}
             >{(label.startsWith('img:')) ?
                 <img className="taskeel-images"
-                    style={{ width: "28px", height: "48px", backgroundColor: "#343a40" }}
+                    style={{ width: "21px", height: "48px", backgroundColor: "#343a40" }}
                     alt=""
                     src={tashkeelVec[Number(label.split(":")[1]) - 1]} /> :
                 <span style={{ color: "#fff" }}> {label}</span>
