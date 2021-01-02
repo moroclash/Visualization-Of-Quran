@@ -1,14 +1,43 @@
+import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getAllQuranInfo, getSouraInfo } from './models/Prepare';
+import { getAllQuranInfo } from './models/Prepare';
+import AddCharBar from './components/AddCharBar';
+import ReactVirtualizedTable from './components/CharTable';
 
-function App() {
-  let Quran = getAllQuranInfo()
-  console.log(Quran)
-  getSouraInfo(112)
-  return (
-    <Navbar swar_names={Quran.swar_names} systems={Quran.systems_info} />
-  );
+
+
+let Quran = getAllQuranInfo();
+console.log(Quran)
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      rows: [],
+    }
+  }
+
+  onAdd = (rowData) => {
+    let newRows = this.state.rows
+    rowData.id = newRows.length+1
+    newRows.push(rowData)
+    this.setState({ rows: newRows })
+  }
+
+  onDelete = (id) => {
+    let newRows = this.state.rows.filter( row => row.id !== id)
+    this.setState({rows: newRows}) 
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Navbar />
+        <AddCharBar Quran={Quran} onAdd={this.onAdd}/>
+        <ReactVirtualizedTable rows={this.state.rows} />
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;

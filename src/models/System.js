@@ -3,6 +3,6 @@ export default function System(chares) {
    * System Class
    */
 
-  //array of char
+  //dict of chars
   this.groups = chares
 }

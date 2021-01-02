@@ -23,12 +23,12 @@ export function getAllQuranInfo() {
     swar_names.unshift("ALl")
 
     //get systems Information
-    let systems = []
+    let systems = {}
     // calculate systems and their information
     // map on every system
-    Quran.getElementsByTagName("count_system").forEach(sys => {
-        // list of char objects
-        let chars_of_system = []
+    Quran.getElementsByTagName("count_system").forEach( (sys, key) => {
+        // dict of char objects
+        let chars_of_system = {}
         //map on every char in this sys to get the count of every tashkeel
         sys.value.split("|").forEach(char => {
             char = char.split('*')
@@ -41,10 +41,10 @@ export function getAllQuranInfo() {
                 tashkeel_[key] = Number(count)
             })
             //push ot chars List
-            chars_of_system.push(new Char(char_name, char_count, tashkeel_))
+            chars_of_system[char_name] = new Char(char_count, tashkeel_)
         })
         //push ot systems List
-        systems.push(new System(chars_of_system))
+        systems[key] = new System(chars_of_system)
     })
 
     let all_count_tashkeel = {}
@@ -58,7 +58,7 @@ export function getAllQuranInfo() {
         all_count_tashkeel,
         total_char_count_in_quran,
         ayat_num)
-
+    
     return All_Quran_info_
 };
  
@@ -68,8 +68,13 @@ export async function getSouraInfo(soura_num){
     /**
      * this function to parse specific Sour information from XML at "assets/Quran-content"
      */
-
-    const souraContent = await import(`../assets/Quran-content/${soura_num}`)
+    let souraContent;
+    try{
+        souraContent = await import(`../assets/Quran-content/${soura_num}`)
+    }
+    catch(err){
+        throw new Error('not found')
+    }
     //parse to object
     let SouraInfo = new XMLParser().parseFromString(souraContent.default)
 
@@ -78,14 +83,14 @@ export async function getSouraInfo(soura_num){
     let sura_num = SouraFrequency.attributes['number']
     let sura_name = SouraFrequency.attributes['name']
     
-    let ayat = []
-    SouraFrequency.children.forEach( aya => {
+    let ayat = {}
+    SouraFrequency.children.forEach( (aya, aya_key) => {
         let aya_num = aya.attributes['number']
         let char_count_of_aya = Number(aya.attributes['total_char_count_in_aya'])
 
-        let aya_chars = []
+        let aya_chars = {}
         let aya_tashkeel = {}
-        let aya_systems = []
+        let aya_systems = {}
         
         //collect the information of characters of aya 
         aya.getElementsByTagName('count_alphabet')[0]
@@ -102,7 +107,7 @@ export async function getSouraInfo(soura_num){
                     let [key, value] = tashkeel.split(":")
                     char_tashkeel[key] = Number(value)
                 });
-                aya_chars.push(new Char(char_name, char_count, char_tashkeel))
+                aya_chars[char_name] = new Char(char_count, char_tashkeel)
            });
         
         
@@ -116,9 +121,9 @@ export async function getSouraInfo(soura_num){
             });
 
         //collect systems of aya
-        aya.getElementsByTagName('count_system').forEach(system => {
+        aya.getElementsByTagName('count_system').forEach((system, sys_key) => {
             //collect system groups
-            let groups = []
+            let groups = {}
             system.value.split("|").forEach( group => {
                 group = group.split("*")
                 let group_name = group[0]
@@ -130,12 +135,25 @@ export async function getSouraInfo(soura_num){
                     let [key, value] = tashkeel.split(":")
                     group_tashkeel[key] = Number(value)
                 });
-                groups.push(new Char(group_name, group_count, group_tashkeel))
+                groups[group_name] = new Char(group_count, group_tashkeel)
             });
-            aya_systems.push(new System(groups))
+            aya_systems[sys_key] = new System(groups)
         })
-        ayat.push(new Aya(aya_num, char_count_of_aya, aya_chars, aya_tashkeel, aya_systems))
+        ayat[Number(aya_num)] = new Aya(aya_num, char_count_of_aya, aya_chars, aya_tashkeel, aya_systems)
     })
 
     return new Soura(sura_name, sura_num, char_count_in_sura, ayat)
 }; //end if getSouraInfo
+
+
+export function getState(id, dataObj, soura_id, aya_num, system_id, system, char){
+    //check if All Quran
+    if(soura_id === 0){
+         return dataObj.getAllInfoForChar(id, system_id, char)
+    }
+    //check Soura
+    else{
+        console.log(dataObj)
+        return dataObj.getAllInfoForChar(id, aya_num, system_id, system, char)
+    }
+}

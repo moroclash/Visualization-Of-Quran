@@ -1,7 +1,9 @@
+import { CreateDataRow } from './Globals';
+
 export default function All_Quran_info(swar_names, systems, tashkeels, total_char_count_in_quran, ayat_num) {
   // array of swar names
   this.swar_names = swar_names
-  // array of chars
+  // dict of systems
   this.systems = systems
   // dictionary of tashkeels
   this.tashkeels = tashkeels
@@ -10,8 +12,23 @@ export default function All_Quran_info(swar_names, systems, tashkeels, total_cha
   this.ayat_num = ayat_num
   this.systems_info = []
 
-  this.systems.map(sys => {
-    this.systems_info.push(sys.groups.length)
+  Object.values(this.systems).forEach(sys => {
+    this.systems_info.push(Object.keys(sys.groups).length)
   })
+
+  this.getAllInfoForChar = function (id, system_id, char) {
+    let AllCharInfo = this.systems[system_id].groups[char]
+    return CreateDataRow(id, "ALL", "ALL", this.systems_info[system_id], char, AllCharInfo.count, AllCharInfo.tashkeel)
+  }
+
+  this.getAllInfo = function (id, system) {
+    return CreateDataRow(id,
+                         this.swar_num,
+                         this.ayat_num,
+                         system,
+                         "ALL",
+                         this.total_char_count_in_quran,
+                         this.tashkeel)
+  }
 
 }
