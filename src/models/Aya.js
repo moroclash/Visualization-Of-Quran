@@ -11,4 +11,5 @@ export default function Aya(aya_num, total_char_count, count_alphabet, tashkeel_
 
   //dict of system
   this.systems = systems
+
 }

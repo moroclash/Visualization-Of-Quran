@@ -11,36 +11,46 @@ function getData(id, callback) {
         .catch(err => err)
 }
 
+function addAtBegining(list){
+    list.unshift('All')
+    return list
+}
+
 function getDataObject(soura, systemNum) {
     return ({
         Soura: soura,
-        ayaList: Object.keys(soura.ayat),
-        charList: Object.keys(soura.ayat[1].systems[systemNum].groups),
+        ayaList: addAtBegining(Object.keys(soura.ayat)),
+        charList: addAtBegining(Object.keys(soura.ayat[1].systems[systemNum].groups)),
         souraID: Number(soura.soura_num),
         souraValue: soura.soura_name
     })
 }
 
 
+const defaultCharIndex = 1
+const defaultAyaVlaue = 1
+const defaultSystemValue = 0
+const defaultSoura = 1
+
 class AddCharBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
             Soura: null,
-            souraID: 1,
+            souraID: defaultSoura,
             charList: [],
             ayaList: [],
-            systemValue: 0,
-            ayaValue: 1,
+            systemValue: defaultSystemValue,
+            ayaValue: defaultAyaVlaue,
             charValue: '',
             souraValue: '',
-            charIndex: 0,
+            charIndex: defaultCharIndex,
         }
     }
 
     onSouraChange = (id) => {
         if (id === 0) {
-            this.setState({souraID: id})
+            this.setState({souraID: id, souraValue: ''})
         }
         else {
             getData(id, (soura) => {
@@ -50,9 +60,12 @@ class AddCharBar extends Component {
     }
 
     onSystemChange = (id) => {
+        let charList = addAtBegining(Object.keys(this.state.Soura.ayat[1].systems[id].groups))
         this.setState({
             systemValue: id,
-            charList: Object.keys(this.state.Soura.ayat[1].systems[id].groups)
+            charValue: charList[defaultCharIndex],
+            charIndex: defaultCharIndex,
+            charList: charList
         })
     }
 

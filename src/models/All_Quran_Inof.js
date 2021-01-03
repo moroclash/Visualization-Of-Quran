@@ -22,14 +22,14 @@ export default function All_Quran_info(swar_names, systems, tashkeels, total_cha
     return CreateDataRow(id, "ALL", "ALL", this.systems_info[system_id], char, AllCharInfo.count, AllCharInfo.tashkeel)
   }
 
-  this.getAllInfo = function (id, system) {
+  this.getAllInfo = function (id) {
     return CreateDataRow(id,
                          this.swar_num,
                          this.ayat_num,
-                         system,
+                         "All",
                          "ALL",
                          this.total_char_count_in_quran,
-                         this.tashkeel)
+                         this.tashkeels)
   }
 
 }

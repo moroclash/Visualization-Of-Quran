@@ -7,15 +7,15 @@ class AddBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            chooseAll: false,
+            chooseAllSoura: false,
+            chooseAllChar: false,
         }
     }
-
 
     onSouraChange = (value) => {
         let id = Number(value.split(':')[0].trim())
         this.setState({
-            chooseAll: value.localeCompare('0 : ALl') === 0 ? true : false,
+            chooseAllSoura: value.localeCompare('0 : All') === 0 ? true : false,
         })
         this.props.onSouraChange(id)
     }
@@ -29,8 +29,11 @@ class AddBar extends Component {
     }
 
     onCharChange = (value) => {
-        let [id, val] = value.split(':')
-        this.props.onCharChange(val.trim(), Number(id.trim()))
+        let [id, val] = value.split(':')        
+        this.setState({
+            chooseAllChar: value.localeCompare('0 : All') === 0 ? true : false
+        })
+        this.props.onCharChange((val.trim() === 'All')? '' : val.trim(), Number(id.trim()))
     }
 
     render() {
@@ -49,13 +52,13 @@ class AddBar extends Component {
                         withIndex={false}
                         handler={this.onAyaChange}
                         defaultIndex={this.props.data.ayaValue}
-                        disable={this.state.chooseAll} />
+                        disable={this.state.chooseAllSoura} />
 
                     <List title="نظام الاحرف" options={this.props.Quran.systems_info}
                         defaultIndex={this.props.data.systemValue}
                         handler={this.onSystemChange}
                         withIndex={true}
-                        disable={false} />
+                        disable={this.state.chooseAllChar} />
 
                     <List title="الحرف"
                         options={this.props.data.charList}

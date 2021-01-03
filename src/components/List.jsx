@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
 class List extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { defaultValue: `${this.props.withIndex?`${props.defaultIndex} : `:""}${props.options[props.defaultIndex]}`}
-    }
-
     onChange = (event) => {
         this.setState({defaultValue: event.target.value})
         if(this.props.handler){
@@ -14,10 +9,11 @@ class List extends Component {
     }
 
     render() {
+        let defaultValue = `${this.props.withIndex?`${this.props.defaultIndex} : `:""}${this.props.options[this.props.defaultIndex]}`
         return (
             <div>
                 <select className="browser-default custom-select mr-md-5"
-                        value={this.state.defaultValue}
+                        value={defaultValue}
                         disabled={this.props.disable}
                         onChange={this.onChange}>
                     {
