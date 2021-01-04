@@ -1,0 +1,16 @@
+.ReactVirtualized__Table__headerColumn {
+   margin: 0px;   
+}
+
+.ReactVirtualized__Table__headerColumn:first-of-type, .ReactVirtualized__Table__rowColumn:first-of-type {
+    margin: 0px;
+}
+
+.ReactVirtualized__Table__headerColumn, .ReactVirtualized__Table__rowColumn{
+    margin: 0px;
+}
+
+.MuiTableCell-root {
+    text-align: center;
+    width: 100%;
+}

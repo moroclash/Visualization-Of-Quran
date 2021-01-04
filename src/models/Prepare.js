@@ -169,8 +169,12 @@ export function getState(id, dataObj, soura_id, aya_num, system_id, system, char
                 return dataObj.getAllInfoForAya(id, aya_num)
         }
         else{
-            //get count of char for specific char
-            return dataObj.getAllInfoForChar(id, aya_num, system_id, system, char)
+            if(!char)
+                //get all for one aya
+                return dataObj.getAllInfoForAya(id, aya_num)
+            else
+                //get count of char for specific char
+                return dataObj.getAllInfoForChar(id, aya_num, system_id, system, char)
         }                    
     }
 }

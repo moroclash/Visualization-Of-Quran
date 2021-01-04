@@ -10,7 +10,7 @@ class Navbar extends Component {
 
         return (
             <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-                <a to="#" className="navbar-brand">القرأن الكريم</a>
+                <a to="#" className="navbar-brand">الْقُرْآنِ الْكَرِيمِ</a>
                 <div className="collpase navbar-collapse">
                     <ul className="navbar-nav mr-auto">
                         {/* <li className="navbar-item">

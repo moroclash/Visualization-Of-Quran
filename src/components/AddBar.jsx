@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import List from './List';
 import { Navbar, Form, Button } from 'react-bootstrap'
-// import { getState } from '../models/Prepare';
 
 class AddBar extends Component {
     constructor(props) {
@@ -29,11 +28,11 @@ class AddBar extends Component {
     }
 
     onCharChange = (value) => {
-        let [id, val] = value.split(':')        
+        let [id, val] = value.split(':')
         this.setState({
             chooseAllChar: value.localeCompare('0 : All') === 0 ? true : false
         })
-        this.props.onCharChange((val.trim() === 'All')? '' : val.trim(), Number(id.trim()))
+        this.props.onCharChange((val.trim() === 'All') ? '' : val.trim(), Number(id.trim()))
     }
 
     render() {
@@ -42,30 +41,38 @@ class AddBar extends Component {
                 <Navbar.Brand style={{ color: "#fff" }}> إضافه حرف</Navbar.Brand>
                 <Form inline>
                     <List title="السوره" options={this.props.Quran.swar_names}
+                        tooltipText="السوره"
                         defaultIndex={this.props.data.souraID}
                         handler={this.onSouraChange}
                         disable={false}
                         withIndex={true} />
 
-                    <List title="ألأيه"
+
+                    <List title="الآية"
+                        tooltipText="الآية"
                         options={this.props.data.ayaList}
                         withIndex={false}
                         handler={this.onAyaChange}
                         defaultIndex={this.props.data.ayaValue}
                         disable={this.state.chooseAllSoura} />
 
-                    <List title="نظام الاحرف" options={this.props.Quran.systems_info}
+
+                    <List title="نظام الأحرف" options={this.props.Quran.systems_info}
+                        tooltipText="نظام الأحرف"
                         defaultIndex={this.props.data.systemValue}
                         handler={this.onSystemChange}
                         withIndex={true}
                         disable={this.state.chooseAllChar} />
 
+
                     <List title="الحرف"
+                        tooltipText="الحرف"
                         options={this.props.data.charList}
                         handler={this.onCharChange}
                         withIndex={true}
                         defaultIndex={this.props.data.charIndex}
                         disable={false} />
+
                     <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
                 </Form>
             </Navbar>
