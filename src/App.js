@@ -22,7 +22,6 @@ class App extends Component {
     rowData.id = newRows.length === 0? 1 : newRows[newRows.length-1].id+1
     newRows.push(rowData)
     this.setState({ rows: newRows })
-    console.log(rowData)
   }
 
   onDelete = (id) => {

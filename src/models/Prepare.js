@@ -20,7 +20,7 @@ export function getAllQuranInfo() {
     const total_char_count_in_quran = QuranInfo.attributes['total_char_count']
     const ayat_num = QuranInfo.attributes['ayat_num']
     const swar_names = Quran.getElementsByTagName('swar_name')[0].value.split(',')
-    swar_names.unshift("All")
+    swar_names.unshift("الكل")
 
     //get systems Information
     let systems = {}
@@ -162,11 +162,11 @@ export function getState(id, dataObj, soura_id, aya_num, system_id, system, char
         if(aya_num === 0){
             //check if count for all ayat or spcific one
             if(!char)
-                //get all for all ayat
+                //get all for all chars
                 return dataObj.getAllInfoForAll(id)
             else
-                //get all for one aya
-                return dataObj.getAllInfoForAya(id, aya_num)
+                //get all ayat for one char
+                return dataObj.getAllInfoForOneChar(id, system_id, system, char)
         }
         else{
             if(!char)

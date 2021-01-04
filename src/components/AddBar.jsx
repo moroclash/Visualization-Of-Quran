@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import List from './List';
 import { Navbar, Form, Button } from 'react-bootstrap'
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
+
 
 class AddBar extends Component {
     constructor(props) {
@@ -14,13 +16,13 @@ class AddBar extends Component {
     onSouraChange = (value) => {
         let id = Number(value.split(':')[0].trim())
         this.setState({
-            chooseAllSoura: value.localeCompare('0 : All') === 0 ? true : false,
+            chooseAllSoura: id === 0 ? true : false,
         })
         this.props.onSouraChange(id)
     }
 
     onAyaChange = (value) => {
-        this.props.onAyaChange((value === 'All') ? 0 : Number(value))
+        this.props.onAyaChange((value === 'الكل') ? 0 : Number(value))
     }
 
     onSystemChange = (value) => {
@@ -29,16 +31,17 @@ class AddBar extends Component {
 
     onCharChange = (value) => {
         let [id, val] = value.split(':')
+        id = Number(id.trim())
         this.setState({
-            chooseAllChar: value.localeCompare('0 : All') === 0 ? true : false
+            chooseAllChar: id === 0 ? true : false
         })
-        this.props.onCharChange((val.trim() === 'All') ? '' : val.trim(), Number(id.trim()))
+        this.props.onCharChange(id === 0 ? '' : val.trim(), id)
     }
 
     render() {
         return (
             <Navbar className="bg-primary justify-content-between">
-                <Navbar.Brand style={{ color: "#fff" }}> إضافه حرف</Navbar.Brand>
+                <Navbar.Brand style={{ color: "#fff" }}> إضافة حرف</Navbar.Brand>
                 <Form inline>
                     <List title="السوره" options={this.props.Quran.swar_names}
                         tooltipText="السوره"
@@ -73,7 +76,11 @@ class AddBar extends Component {
                         defaultIndex={this.props.data.charIndex}
                         disable={false} />
 
-                    <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+
+                    <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">إضافة الحرف</Tooltip>}>
+                        <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+                    </OverlayTrigger>
+
                 </Form>
             </Navbar>
         );

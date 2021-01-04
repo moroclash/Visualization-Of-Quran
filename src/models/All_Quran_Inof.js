@@ -17,17 +17,16 @@ export default function All_Quran_info(swar_names, systems, tashkeels, total_cha
   })
 
   this.getAllInfoForChar = function (id, system_id, char) {
-    console.log(id, system_id, char)
     let AllCharInfo = this.systems[system_id].groups[char]
-    return CreateDataRow(id, "ALL", "ALL", this.systems_info[system_id], char, AllCharInfo.count, AllCharInfo.tashkeel)
+    return CreateDataRow(id, "الكل", "الكل", this.systems_info[system_id], char, AllCharInfo.count, AllCharInfo.tashkeel)
   }
 
   this.getAllInfo = function (id) {
     return CreateDataRow(id,
                          this.swar_num,
                          this.ayat_num,
-                         "All",
-                         "ALL",
+                         "الكل",
+                         "الكل",
                          this.total_char_count_in_quran,
                          this.tashkeels)
   }

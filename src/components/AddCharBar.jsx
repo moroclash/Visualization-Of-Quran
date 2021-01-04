@@ -12,7 +12,7 @@ function getData(id, callback) {
 }
 
 function addAtBegining(list){
-    list.unshift('All')
+    list.unshift('الكل')
     return list
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
-import { Column, Table,  AutoSizer } from "react-virtualized";
+import { Column, Table, AutoSizer } from "react-virtualized";
 import "react-virtualized/styles.css";
 import TableCell from '@material-ui/core/TableCell';
 import tashkeelVec from '../models/TashkeelVec';
 import { Tooltip, OverlayTrigger, Button } from "react-bootstrap";
+import { tashkeelOrder } from '../models/Globals';
 import '../assets/all.css';
-import {tashkeelOrder} from '../models/Globals';
 
 
-const HeadNames = [['ID', 0, 'id'],
+const HeadNames = [['#', 0, 'id'],
 ["السوره", 1, 'souraName'],
 ['الآية', 1, 'aya'],
 ['النظام', 0, 'system'],
@@ -60,18 +60,20 @@ class ReactVirtualizedTable extends React.Component {
                     display: 'flex',
                     alignItems: 'center',
                     boxSizing: 'border-box',
-                    margin:0,
+                    margin: 0,
                 }}
             >
-                {(label.startsWith('img:')) ?
-                    <div 
-                        style={{width: '100%', textAlign: 'center'}}
-                    ><img className="taskeel-images"
-                        style={{ width: "21px", height: "48px", backgroundColor: "#343a40" }}
-                        alt=""
-                        src={tashkeelVec[Number(label.split(":")[1]) - 1]} /></div> :
-                    <span style={{ color: "#fff", width:'100%'}}> {label}</span>
-                }
+                <div
+                    style={{ width: '100%', textAlign: 'center' }}
+                >
+                    {(label.startsWith('img:')) ?
+                        <img className="taskeel-images"
+                            style={{ width: "21px", height: "48px", backgroundColor: "#343a40" }}
+                            alt=""
+                            src={tashkeelVec[Number(label.split(":")[1]) - 1]} /> :
+                        <span style={{ color: "#fff", width: '100%' }}> {label}</span>
+                    }
+                </div>
             </TableCell>
         );
     };
@@ -94,7 +96,6 @@ class ReactVirtualizedTable extends React.Component {
     };
 
     render() {
-        console.log(this.props.rows)
         return (
             <div style={{ height: 400, marginTop: 2, width: '100%', textAlign: 'center' }}>
                 <AutoSizer>
@@ -115,7 +116,7 @@ class ReactVirtualizedTable extends React.Component {
                                         this.headerRenderer(cell[0])
                                     }
                                     cellRenderer={this.cellRenderer}
-
+                                    key={index}
                                 />))}
                         </Table>
                     )}
