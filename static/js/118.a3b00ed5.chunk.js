@@ -1,2 +1,0 @@
-(this.webpackJsonpvisualization_of_quran=this.webpackJsonpvisualization_of_quran||[]).push([[118],{328:function(i,s,a){"use strict";a.r(s),s.default=a.p+"static/media/converterXml-js.74b52290.sh"}}]);
-//# sourceMappingURL=118.a3b00ed5.chunk.js.map
