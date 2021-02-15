@@ -11,7 +11,7 @@ import '../assets/all.css';
 const HeadNames = [['#', 0, 'id'],
 ["السوره", 1, 'souraName'],
 ['الآية', 1, 'aya'],
-['النظام', 0, 'system'],
+// ['النظام', 0, 'system'],
 ["الحرف", 1, 'char'],
 ["العدد", 1, 'count'],
 ["img:1", 0, tashkeelOrder[0]],
