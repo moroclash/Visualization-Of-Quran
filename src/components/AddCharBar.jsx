@@ -103,6 +103,7 @@ class AddCharBar extends Component {
     render() {
         return (
             <AddBar currentSouraID={this.state.souraID}
+                rows={this.props.rows}
                 Quran={this.props.Quran}
                 data={this.state}
                 onSouraChange={this.onSouraChange}

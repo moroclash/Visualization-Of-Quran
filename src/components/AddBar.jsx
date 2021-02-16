@@ -3,10 +3,12 @@ import List from './List';
 import CheckBox from './CheckBox';
 import { Navbar, Form, Button } from 'react-bootstrap'
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
+import CsvDownloader from 'react-csv-downloader';
+import { HeadNames } from '../models/Globals';
 
 const divStyle = { marginRight: "43px" }
 
+const columns = HeadNames.map(x => {return {id: x[2], displayName: x[2]}})
 
 class AddBar extends Component {
     constructor(props) {
@@ -69,8 +71,21 @@ class AddBar extends Component {
                             handler={this.onCharChange} />
                     </div>
 
-                    <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">إضافة الحرف</Tooltip>}>
-                        <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+                    <div style={divStyle}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">إضافة الحرف</Tooltip>}>
+                            <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+                        </OverlayTrigger>
+                    </div>
+
+                    <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">Download as CSV</Tooltip>}>
+                        <CsvDownloader 
+                            filename="Table"
+                            separator=","
+                            wrapColumnChar=""
+                            columns={columns}
+                            datas={this.props.rows}>
+                            <Button className={"button button5"} variant='dark'>CSV</Button>
+                        </CsvDownloader>
                     </OverlayTrigger>
 
                 </div>

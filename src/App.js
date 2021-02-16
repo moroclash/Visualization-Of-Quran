@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <AddCharBar Quran={Quran} onAdd={this.onAdd}/>
+        <AddCharBar Quran={Quran} rows={this.state.rows} onAdd={this.onAdd}/>
         <ReactVirtualizedTable rows={this.state.rows} onDelete={this.onDelete} />
         <Visualization rows={this.state.rows}/>
       </React.Fragment>
