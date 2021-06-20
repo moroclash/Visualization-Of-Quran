@@ -11,7 +11,7 @@ function getData(id, callback) {
         .catch(err => err)
 }
 
-function addAtBegining(list){
+function addAtBegining(list) {
     list.unshift('الكل')
     return list
 }
@@ -20,7 +20,7 @@ function getDataObject(soura, systemNum) {
     return ({
         Soura: soura,
         ayaList: addAtBegining(Object.keys(soura.ayat)),
-        charList: addAtBegining(Object.keys(soura.ayat[1].systems[systemNum].groups)),
+        charList: Object.keys(soura.ayat[1].systems[systemNum].groups),
         souraID: Number(soura.soura_num),
         souraValue: soura.soura_name
     })
@@ -42,7 +42,7 @@ class AddCharBar extends Component {
             ayaList: [],
             systemValue: defaultSystemValue,
             ayaValue: defaultAyaVlaue,
-            charValue: '',
+            charValue: [],
             souraValue: '',
             charIndex: defaultCharIndex,
         }
@@ -50,7 +50,7 @@ class AddCharBar extends Component {
 
     onSouraChange = (id) => {
         if (id === 0) {
-            this.setState({souraID: id, souraValue: ''})
+            this.setState({ souraID: id, souraValue: '' })
         }
         else {
             getData(id, (soura) => {
@@ -79,17 +79,17 @@ class AddCharBar extends Component {
     }
 
     onAdd = () => {
-        this.props.onAdd(
-            getState(0,
-                (this.state.souraID === 0) ? this.props.Quran : this.state.Soura,
-                 this.state.souraValue,
-                 this.state.ayaValue,
-                 this.state.systemValue,
-                 this.props.Quran.systems_info[this.state.systemValue],
-                 this.state.charValue)
-        )
+        if (typeof(this.state.charValue) === 'object' && this.state.charValue.length > 0) 
+            this.props.onAdd(
+                getState(0,
+                    (this.state.souraID === 0) ? this.props.Quran : this.state.Soura,
+                    this.state.souraValue,
+                    this.state.ayaValue,
+                    this.state.charValue)
+            
+            )
+        
     }
-
 
     componentDidMount() {
         getData(this.state.souraID, (soura) => {
@@ -103,6 +103,7 @@ class AddCharBar extends Component {
     render() {
         return (
             <AddBar currentSouraID={this.state.souraID}
+                rows={this.props.rows}
                 Quran={this.props.Quran}
                 data={this.state}
                 onSouraChange={this.onSouraChange}

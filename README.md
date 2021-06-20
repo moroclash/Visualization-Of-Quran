@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# الْمُعْجَم الترددي لِلْحُرُوف الْعَرَبِيَّةِ فِي الْقُرْآنِ الْكَرِيمِ     The Quranic letters' frequency lexicon 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### This project is a beta version, it helps you to track frequencies of Quran characters through a multidimensional view, and one of (PyQuran)[https://github.com/hci-lab/PyQuran] applications.
+![overview](./images/img1.png)
 
-## Available Scripts
 
-In the project directory, you can run:
+# How to use
+the (APP)[https://moroclash.github.io/Visualization-Of-Quran/]
+it supports multiple filtrations based on:
+1. Surah
+2. Aya
+3. Characters
+#### So it allows you to apply any sort of filtrations in order to fit your search aspects.
+![filteration options](./images/img3.png)
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### for character filtrations, you can choose a solo character or combine any sort of characters together, and it will consider those combined characters as one letter (e.g ة,ت == one-letter), that allows you to create any systems according to your use-case or your inspiration.
+![filteration based characters](./images/img8.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### after customized the filtrations setting, hit the add button to get the results
+![Append button](./images/img5.png)
 
-### `yarn test`
+#### you will get the character's all shapes frequencies (with-tashkeel and without) according to the filtration settings you set.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+#### Conclousion:
+## This one of the Applications you can do using (PyQuran)[https://github.com/hci-lab/PyQuran], and allows you to look and meditate on something that you have not thought about before.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## References:
+* (PyQuran)[https://github.com/hci-lab/PyQuran]
+* We have used the Quran Corpus of (PyQuran)[https://github.com/hci-lab/PyQuran]

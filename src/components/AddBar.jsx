@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import List from './List';
+import CheckBox from './CheckBox';
 import { Navbar, Form, Button } from 'react-bootstrap'
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import CsvDownloader from 'react-csv-downloader';
+import { HeadNames } from '../models/Globals';
 
+const divStyle = { marginRight: "43px" }
+
+const columns = HeadNames.map(x => {return {id: x[2], displayName: x[2]}})
 
 class AddBar extends Component {
     constructor(props) {
@@ -30,58 +36,59 @@ class AddBar extends Component {
     }
 
     onCharChange = (value) => {
-        let [id, val] = value.split(':')
-        id = Number(id.trim())
-        this.setState({
-            chooseAllChar: id === 0 ? true : false
-        })
-        this.props.onCharChange(id === 0 ? '' : val.trim(), id)
+        this.props.onCharChange(value.length == this.props.data.charList.length ? ['*'] : value, 0)
     }
 
     render() {
         return (
             <Navbar className="bg-primary justify-content-between">
                 <Navbar.Brand style={{ color: "#fff" }}> إضافة حرف</Navbar.Brand>
-                <Form inline>
-                    <List title="السوره" options={this.props.Quran.swar_names}
-                        tooltipText="السوره"
-                        defaultIndex={this.props.data.souraID}
-                        handler={this.onSouraChange}
-                        disable={false}
-                        withIndex={true} />
+                <div style={{ display: "-webkit-box" }}>
+                    <div style={divStyle}>
+                        <List title="السوره" options={this.props.Quran.swar_names}
+                            tooltipText="السوره"
+                            defaultIndex={this.props.data.souraID}
+                            handler={this.onSouraChange}
+                            disable={false}
+                            withIndex={true} />
+                    </div>
+
+                    <div style={divStyle}>
+                        <List title="الآية"
+                            tooltipText="الآية"
+                            options={this.props.data.ayaList}
+                            withIndex={false}
+                            handler={this.onAyaChange}
+                            defaultIndex={this.props.data.ayaValue}
+                            disable={this.state.chooseAllSoura} />
+                    </div>
 
 
-                    <List title="الآية"
-                        tooltipText="الآية"
-                        options={this.props.data.ayaList}
-                        withIndex={false}
-                        handler={this.onAyaChange}
-                        defaultIndex={this.props.data.ayaValue}
-                        disable={this.state.chooseAllSoura} />
+                    <div style={divStyle}>
+                        <CheckBox title="الأحرف"
+                            tooltipText="الأحرف"
+                            options={this.props.data.charList}
+                            handler={this.onCharChange} />
+                    </div>
 
+                    <div style={divStyle}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">إضافة الحرف</Tooltip>}>
+                            <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+                        </OverlayTrigger>
+                    </div>
 
-                    <List title="نظام الأحرف" options={this.props.Quran.systems_info}
-                        tooltipText="نظام الأحرف"
-                        defaultIndex={this.props.data.systemValue}
-                        handler={this.onSystemChange}
-                        withIndex={true}
-                        disable={this.state.chooseAllChar} />
-
-
-                    <List title="الحرف"
-                        tooltipText="الحرف"
-                        options={this.props.data.charList}
-                        handler={this.onCharChange}
-                        withIndex={true}
-                        defaultIndex={this.props.data.charIndex}
-                        disable={false} />
-
-
-                    <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">إضافة الحرف</Tooltip>}>
-                        <Button className={"button button5"} variant="success" onClick={this.props.onAdd}>+</Button>
+                    <OverlayTrigger placement="top" overlay={<Tooltip id="remove_tooltip">Download as CSV</Tooltip>}>
+                        <CsvDownloader 
+                            filename="Table"
+                            separator=","
+                            wrapColumnChar=""
+                            columns={columns}
+                            datas={this.props.rows}>
+                            <Button className={"button button5"} variant='dark'>CSV</Button>
+                        </CsvDownloader>
                     </OverlayTrigger>
 
-                </Form>
+                </div>
             </Navbar>
         );
     }

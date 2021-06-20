@@ -16,9 +16,21 @@ export default function All_Quran_info(swar_names, systems, tashkeels, total_cha
     this.systems_info.push(Object.keys(sys.groups).length)
   })
 
-  this.getAllInfoForChar = function (id, system_id, char) {
-    let AllCharInfo = this.systems[system_id].groups[char]
-    return CreateDataRow(id, "الكل", "الكل", this.systems_info[system_id], char, AllCharInfo.count, AllCharInfo.tashkeel)
+  this.getAllInfoForChars = function (id, system_id, chars) {
+    let all_Tashkeel_Counts_for_char = {}
+    let system = this.systems[system_id]
+    let total_char_count = 0
+    chars.forEach(char => {
+      let AllCharInfo = system.groups[char]
+      total_char_count += AllCharInfo.count
+      Object.keys(AllCharInfo.tashkeel).forEach(key => {
+          if (all_Tashkeel_Counts_for_char[key])
+            all_Tashkeel_Counts_for_char[key] += AllCharInfo.tashkeel[key]
+          else
+            all_Tashkeel_Counts_for_char[key] = AllCharInfo.tashkeel[key]
+        })
+    })
+    return CreateDataRow(id, "الكل", "الكل", '**', chars.join(','), total_char_count, all_Tashkeel_Counts_for_char)
   }
 
   this.getAllInfo = function (id) {

@@ -146,35 +146,36 @@ export async function getSouraInfo(soura_num){
 }; //end if getSouraInfo
 
 
-export function getState(id, dataObj, soura_id, aya_num, system_id, system, char){
+export function getState(id, dataObj, soura_id, aya_num, chars){
+    if(chars[0] !== '*') chars = chars.map(x => x.label)
     //check if All Quran with All char, or ALl Quran for spcific char
     if(!soura_id){
-        if(!char)
+        if(chars[0] === '*')
             //get for All Quran with All char
             return dataObj.getAllInfo(id)
         else
-            //all Quran for specific char
-            return dataObj.getAllInfoForChar(id, system_id, char)
+            //all Quran for chars
+            return dataObj.getAllInfoForChars(id, 0, chars)
     }
     //check Soura
     else{
         //check All ayat
         if(aya_num === 0){
             //check if count for all ayat or spcific one
-            if(!char)
+            if(chars[0] === '*')
                 //get all for all chars
                 return dataObj.getAllInfoForAll(id)
             else
-                //get all ayat for one char
-                return dataObj.getAllInfoForOneChar(id, system_id, system, char)
+                //get all ayat for many chars
+                return dataObj.getAllInfoForChars(id, 0, chars)
         }
         else{
-            if(!char)
+            if(chars[0] === '*')
                 //get all for one aya
                 return dataObj.getAllInfoForAya(id, aya_num)
             else
                 //get count of char for specific char
-                return dataObj.getAllInfoForChar(id, aya_num, system_id, system, char)
+                return dataObj.getAllInfoForAyaChars(id, aya_num, 0, chars)
         }                    
     }
 }
