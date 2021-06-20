@@ -1,10 +1,9 @@
 # الْمُعْجَم الترددي لِلْحُرُوف الْعَرَبِيَّةِ فِي الْقُرْآنِ الْكَرِيمِ     The Quranic letters' frequency lexicon 
 
 #### This project is a beta version, it helps you to track frequencies of Quran characters through a multidimensional view, and one of [PyQuran](https://github.com/hci-lab/PyQuran) applications.
-![overview](.)
-<img src="https://github.com/moroclash/Visualization-Of-Quran/master/images/img1.png">
+<img src="https://github.com/moroclash/Visualization-Of-Quran/blob/master/images/img1.png">
 
-
+![Image of Yaktocat](https://github.com/moroclash/Visualization-Of-Quran/blob/master/images/img1.png)
 
 # How to use
 the (APP)[https://moroclash.github.io/Visualization-Of-Quran/]
