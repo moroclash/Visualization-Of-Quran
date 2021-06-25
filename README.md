@@ -1,4 +1,4 @@
-# The Quranic letters' frequency lexicon الْمُعْجَم الترددي لِلْحُرُوف  فِي الْقُرْآنِ 
+# The frequency lexicon of Quranic letters الْمُعْجَم الترددي لِلْحُرُوف  فِي الْقُرْآنِ 
 
 In this project, we count frequencies of Arabic letters based on any [alphabetical systems](https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems-definitions) you define.
 
@@ -12,17 +12,17 @@ It supports multiple filtrations based on:
 * Aya
 * Characters
 
-So it allows you to apply any sort of filtrations in order to fit your search aspects.
+So it allows you to apply any sort of filtration in order to fit your search aspects.
 ![filteration options](./images/img3.png)
 
 
-For character filtrations, you can choose a solo character or combine any sort of characters together, and it will consider those combined characters as one letter (e.g ة,ت == one-letter), that allows you to create any systems according to your use-case or your inspiration.
+For character filtration, you can choose a single character or a combination of characters, and it will consider those combined characters as single letter (e.g ة,ت == one-letter). This allows you to create any system according to your use-case.
 ![filteration based characters](./images/img8.png)
 
-After customized the filtrations setting, hit the add button to get the results.
+After customizing the filtration setting, hit the add button to get the results.
 ![Append button](./images/img5.png)
 
-You will get the character's all shapes frequencies (with-tashkeel and without) according to the filtration settings you set.
+You will get all character shapes of frequency (with-tashkeel and without) according to your filtration settings.
 
 
 
